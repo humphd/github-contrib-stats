@@ -81,6 +81,16 @@ Promise.all(
 )
 .then(() => {
   stats.studentsTotal = Object.keys(stats.students).length;
+
+  // sort repos by total, and produce list of top 25
+  stats.topRepos = Object
+    .keys(stats.repos)
+    .sort((a, b) =>
+      stats.repos[a].total > stats.repos[b].total
+    ).reverse()
+    .slice(0,25)
+    .map(name => `${name} - (${stats.repos[name].total} PRs)`);
+
   fs.writeFile(prData, JSON.stringify(stats, null, 2), (err) => {
     if(err) {
       console.error(`unable to write ${prData}: ${err.message}`);
