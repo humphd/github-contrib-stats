@@ -1,13 +1,13 @@
 {
   "name": "github-contrib-stats",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Download and count GitHub Issue, Repo, and PR stats from URLs",
   "scripts": {
     "pr-info": "node tools/pull-request-info.js",
     "issue-info": "node tools/issue-info.js",
-    "extract-urls": "node tools/extract-github-urls.js",
+    "extract-github-urls": "node tools/extract-github-urls.js",
     "download": "node tools/download-github-data.js",
-    "start": "mkdir -p data && npm run extract-urls && npm run download && npm run issue-info && npm run pr-info"
+    "start": "mkdir -p data && npm run extract-github-urls && npm run download && npm run issue-info && npm run pr-info"
   },
   "author": "david.humphrey@senecacollege.ca",
   "license": "MIT",

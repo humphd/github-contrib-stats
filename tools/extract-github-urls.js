@@ -5,12 +5,12 @@ const path = require('path');
 const axios = require('axios');
 const { githubData } = require('../lib/cache-dir');
 
-const urlsPath = path.resolve(__dirname, '..', process.env.URL_LIST_PATH);
 const urlRegex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
 let urls;
 
 try {
-  urls = require(urlsPath).urls;
+  // Split list of URLs on spaces
+  urls = process.env.URL_LIST.split(' +');
   // Remove dupes
   urls = [...new Set(urls)];
 } catch(e) {
