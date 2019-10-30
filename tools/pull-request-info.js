@@ -1,6 +1,7 @@
 const fs = require('fs');
 const PullRequest = require('../lib/pull-request.js');
 const { cacheDir, githubData, prData } = require('../lib/cache-dir.js');
+const chalk = require('chalk');
 
 let pullRequests;
 
@@ -27,7 +28,8 @@ const stats = {
   additions: 0,
   deletions: 0,
   changed_files: 0,
-  pr_deleted: 0
+  pr_deleted: 0,
+  skipped: 0
 };
 
 Promise.all(
@@ -41,6 +43,13 @@ Promise.all(
       pr.getGitHubData(cacheDir)
         .then(result => {
           const data = result.data;
+
+          // Sanity checks on huge numbers...
+          if(data.additions > process.env.LOC_OUTLIER_THRESHOLD || data.deletions > process.env.LOC_OUTLIER_THRESHOLD) {
+            console.warn(chalk.red(`[skipping PR] exceeded threshold (${process.env.LOC_OUTLIER_THRESHOLD}), PR ${data.html_url} by ${data.user.login} with +${data.additions}/-${data.deletions}`));
+            stats.skipped =+ 1;
+            return resolve();
+          }
 
           stats.repos[owner] = stats.repos[owner] || { total: 0, repos: {} };
           stats.repos[owner].total++;
@@ -61,6 +70,7 @@ Promise.all(
 
           stats.merged += data.merged;
           stats.commits += data.commits;
+
           stats.additions += data.additions;
           stats.deletions += data.deletions;
           stats.changed_files += data.changed_files;
