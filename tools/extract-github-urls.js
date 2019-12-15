@@ -10,7 +10,7 @@ let urls;
 
 try {
   // Split list of URLs on spaces
-  urls = process.env.URL_LIST.split(' +');
+  urls = process.env.URL_LIST.split(/ +/);
   // Remove dupes
   urls = [...new Set(urls)];
 } catch(e) {
