@@ -96,7 +96,7 @@ Promise.all(
   stats.topRepos = Object
     .keys(stats.repos)
     .sort((a, b) =>
-      stats.repos[a].total > stats.repos[b].total
+      stats.repos[a].total - stats.repos[b].total
     ).reverse()
     .slice(0,25)
     .map(name => `${name} - (${stats.repos[name].total} PRs)`);
