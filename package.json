@@ -12,12 +12,12 @@
   "author": "david.humphrey@senecacollege.ca",
   "license": "MIT",
   "dependencies": {
-    "@octokit/plugin-retry": "^2.2.0",
-    "@octokit/plugin-throttling": "^2.7.0",
-    "@octokit/rest": "^16.34.0",
-    "axios": "^0.18.1",
-    "chalk": "^2.4.2",
-    "csv-writer": "^1.5.0",
-    "dotenv": "^7.0.0"
+    "@octokit/plugin-retry": "^3.0.4",
+    "@octokit/plugin-throttling": "^3.3.3",
+    "@octokit/rest": "^18.0.8",
+    "axios": "^0.21.0",
+    "chalk": "^4.1.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^8.2.0"
   }
 }
